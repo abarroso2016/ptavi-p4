@@ -10,11 +10,7 @@ import sys
 # Constantes. Dirección IP del servidor y contenido a enviar
 SERVER = sys.argv[1]
 PORT = int(sys.argv[2])
-args = sys.argv[3:]
-LINE = ''
-
-for arg in args:
-    LINE += arg + " "
+LINE = data = " ".join(sys.argv[3:])
 
 print(LINE)
 
