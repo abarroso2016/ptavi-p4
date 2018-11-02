@@ -8,10 +8,14 @@ import socket
 import sys
 
 # Constantes. Dirección IP del servidor y contenido a enviar
+
+"""
+Creo excepcion para que se salga del programa
+cuando introducimos menos elementos de los requeridos
+"""
 try:
     SERVER = sys.argv[1]
     PORT = int(sys.argv[2])
-#LINE = data = " ".join(sys.argv[4:])
     LINE = sys.argv[4]
     TIPO = sys.argv[3].upper()
     EXPIRES = sys.argv[5]
