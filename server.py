@@ -6,6 +6,7 @@ Clase (y programa principal) para un servidor de eco en UDP simple
 
 import socketserver
 import sys
+import json
 
 dic = {}
 
@@ -27,14 +28,29 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
             if sip[1] != "\rn":
                 if x == True:
                     if sip[1] == "0\r\n":
+                        datos = {
+                            'Sip': elemento,
+                            'Ip': ip,
+                            'Expires': sip[1]
+                        }
+                        with open('datos.json', 'w') as file:
+                            json.dump(datos, file)
                         del dic[elemento]
                         print("Borrar cliente")
                         break
                     else:
                         print(sip[1])
+                        datos = {
+                            'Sip': elemento,
+                            'Ip': ip,
+                            'Expires': sip[1]
+                        }
+                        with open('datos.json', 'w') as file:
+                            json.dump(datos, file)          
                 else:
                     elemento = sip[1]
-                    dic[elemento] = self.client_address[0]
+                    ip = self.client_address[0]
+                    dic[elemento] = ip
                     x = True
         for key in dic:
             print(key + ":" + dic[key])
