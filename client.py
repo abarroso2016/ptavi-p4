@@ -10,9 +10,11 @@ import sys
 # Constantes. Dirección IP del servidor y contenido a enviar
 SERVER = sys.argv[1]
 PORT = int(sys.argv[2])
-LINE = data = " ".join(sys.argv[4:])
+#LINE = data = " ".join(sys.argv[4:])
+LINE = sys.argv[4]
 TIPO = sys.argv[3].upper()
-TODO = TIPO + " sip:" + LINE + " SIP/2.0"
+EXPIRES = sys.argv[5]
+TODO = TIPO + " sip:" + LINE + " SIP/2.0\r\n" + "Expires: " + EXPIRES
 
 
 # Creamos el socket, lo configuramos y lo atamos a un servidor/puerto

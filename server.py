@@ -20,10 +20,18 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
         (all requests will be handled by this method)
         """
         self.wfile.write(b"SIP/2.0 200 OK\r\n\r\n")
+        x = False
         for line in self.rfile:
             print("El cliente nos manda ", line.decode('utf-8'))
             sip = line.decode('utf-8').split(" ")
-            dic[sip[1]] = self.client_address[0]
+            if sip[1] != "\rn":
+                if x == True:
+                    dic["Expires"] = sip[1]
+                    break
+                else:
+                    dic[sip[1]] = self.client_address[0]
+                    x = True
+            #break
         for key in dic:
             print(key + ":" + dic[key])
 
