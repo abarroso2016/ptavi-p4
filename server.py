@@ -26,12 +26,16 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
             sip = line.decode('utf-8').split(" ")
             if sip[1] != "\rn":
                 if x == True:
-                    dic["Expires"] = sip[1]
-                    break
+                    if sip[1] == "0\r\n":
+                        del dic[elemento]
+                        print("Borrar cliente")
+                        break
+                    else:
+                        print(sip[1])
                 else:
-                    dic[sip[1]] = self.client_address[0]
+                    elemento = sip[1]
+                    dic[elemento] = self.client_address[0]
                     x = True
-            #break
         for key in dic:
             print(key + ":" + dic[key])
 
