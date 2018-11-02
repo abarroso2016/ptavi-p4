@@ -44,7 +44,6 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
                         print("Borrar cliente")
                         break
                     else:
-                        print(sip[1])
                         """
                         Caso en el que el Expired es diferente a 0
                         """
@@ -63,6 +62,9 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
                     """
                     dic[elemento] = ip
                     x = True
+        """
+        Muestro el contenido del diccionario
+        """
         for key in dic:
             print(key + ":" + dic[key])
 
